@@ -1,9 +1,10 @@
+#Charcount en C
 
-#============================#
-#      Charcount en [C]      #
-#============================#
+Se compile avec la commande
+'make'
 
-Une version dont la partie fonctionnelle ressemble assez à celle de Nuki.
-Mon but était de créer une fonction similaire à printf sans l'utiliser
-directement, avec exclusivement la fonction "write".
+Nettoyage des fichiers .o
+'clean'
 
+Nettoyage total (fichiers .o, exécutable, librairie)
+'fclean'
