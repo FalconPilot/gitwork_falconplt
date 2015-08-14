@@ -1,2 +1,2 @@
 # gitwork_falconplt
-GitWork's exercices
+Exercices réalisés pour le Gitwork par FalconPilot.
