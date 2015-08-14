@@ -1,3 +1,9 @@
-# gitwork_falconplt
-Exercices réalisés pour le Gitwork par FalconPilot.
-Merci au chan Programmation sur Slack sans qui j'aurais de grosses lacunes :D
+
+#============================#
+#      Charcount en [C]      #
+#============================#
+
+Une version dont la partie fonctionnelle ressemble assez à celle de Nuki.
+Mon but était de créer une fonction similaire à printf sans l'utiliser
+directement, avec exclusivement la fonction "write".
+
