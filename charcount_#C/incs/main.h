@@ -9,8 +9,8 @@ typedef int     bool;
 
 typedef struct  s_disp
 {
-	char        dchar;
-	int         dint;
+    char        dchar;
+    int         dint;
 }               t_disp;
 
 void            d_string(char *str, t_disp display, int fd, bool newline);
