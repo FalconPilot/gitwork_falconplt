@@ -38,7 +38,7 @@ int		main(int argc, char **argv)
 	if (argc != 2)
 	{
 		d_string("#Err[00] : Wrong argument count (2 required)", display, 2, true);
-		return (0);
+		return (1);
 	}
 	charcount(argv[1]);
 	return (0);
