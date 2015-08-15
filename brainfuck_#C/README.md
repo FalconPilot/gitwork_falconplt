@@ -4,7 +4,7 @@ fonctionnel :( - Comme le charcount, pas de printf. Cette version peut lire soit
 liste d'instruction directe, soit un nom de fichier.
 
 #Utilisation du programme
-`./brainfuck "nom du fichier"` OU `./brainfuck "liste d'instructions"
+`./brainfuck "nom du fichier"` OU `./brainfuck "liste d'instructions"`
 
 #Commandes du Makefile
 ##Compilation du programme
