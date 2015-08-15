@@ -4,15 +4,17 @@
 
 #include <main.h>
 
+/* Affichage des erreurs */
 void        d_errors(int code)
 {
     switch (code)
     {
         case (1) : d_string("#Err[00] : Wrong argument count (2 required)\n", 2); break;
-        case (2) : d_string("#Err[01] : Incorrect call (./brainfuck filename/instructions)\n", 2);
+        case (2) : d_string("#Err[01] : Bad syntax (./brainfuck filename/instructions)\n", 2); break;
     }
 }
 
+/* Reconnaissance de caractère */
 t_cursor    cursor_update(t_cursor cursor, char op)
 {
     cursor.loop = 0;
@@ -25,10 +27,12 @@ t_cursor    cursor_update(t_cursor cursor, char op)
         case ('.') : d_char((char)cursor.mem[cursor.pos], 1); break;
         case ('[') : cursor.loop = 1;
         case (']') : cursor.loop = 2;
+        case (',') : cursor.mem[cursor.pos] = getchar(); break;
     }
     return (cursor);
 }
 
+/* Boucle principale */
 void        instructions(char *inst)
 {
     int         i;
@@ -44,17 +48,11 @@ void        instructions(char *inst)
             i++;
         while (cursor.loop == 2 && inst[i] != '[' && cursor.mem[cursor.pos])
             i--;
-        if (inst[i] == ',')
-        {
-            i++;
-            if (inst[i] == 92)
-                i++;
-            cursor.mem[cursor.pos] = inst[i];
-        }
     }
     d_string("\n", 1);
 }
 
+/* Ouverture de fichier */
 void        open_file(int fd)
 {
     int     i;
@@ -68,6 +66,7 @@ void        open_file(int fd)
     close(fd);
 }
 
+/* Fonction principale */
 int         main(int argc, char **argv)
 {
     int     fd;
