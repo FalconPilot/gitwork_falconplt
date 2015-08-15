@@ -15,62 +15,79 @@ void        d_errors(int code)
 }
 
 /* Reconnaissance de caractère */
-t_cursor    cursor_update(t_cursor cursor, char op)
+t_cursor    cursor_update(t_cursor cursor, char *op)
 {
     cursor.loop = 0;
-    switch (op)
+    switch (op[cursor.i])
     {
         case ('>') : cursor.pos++; break;
         case ('<') : cursor.pos--; break;
         case ('+') : cursor.mem[cursor.pos]++; break;
         case ('-') : cursor.mem[cursor.pos]--; break;
         case ('.') : d_char((char)cursor.mem[cursor.pos], 1); break;
-        case ('[') : cursor.loop = 1;
-        case (']') : cursor.loop = 2;
+        case ('[') :
+            cursor.i++;
+            cursor.loop = 1;
+            break;
+        case (']') :
+            cursor.loop = 2;
+            break;
         case (',') : cursor.mem[cursor.pos] = getchar(); break;
     }
     return (cursor);
 }
 
 /* Boucle principale */
-void        instructions(char *inst)
+t_cursor    instructions(char *inst, t_cursor cursor)
 {
-    int         i;
-    t_cursor    cursor;
+    int     i;
 
-    cursor.pos = 0;
-    for (i = 0; i <= MEMORY; i++)
-        cursor.mem[i] = '\0';
-    for (i = 0; inst[i]; i++)
+    while (inst[cursor.i])
     {
-        cursor = cursor_update(cursor, inst[i]);
-        while (cursor.loop == 1 && inst[i] != ']' && cursor.mem[cursor.pos] == '\0')
-            i++;
-        while (cursor.loop == 2 && inst[i] != '[' && cursor.mem[cursor.pos])
-            i--;
+        cursor = cursor_update(cursor, inst);
+        switch (cursor.loop)
+        {
+            case (1) :
+                i = cursor.i;
+                while (cursor.mem[cursor.pos])
+                {
+                    cursor = instructions(inst, cursor);
+                    if (cursor.mem[cursor.pos])
+                        cursor.i = i;
+                }
+                break;
+            case (2) :
+                return (cursor);
+                break;
+        }
+        cursor.i++;
     }
-    d_string("\n", 1);
+    return (cursor);
 }
 
 /* Ouverture de fichier */
-void        open_file(int fd)
+void        open_file(int fd, t_cursor cursor)
 {
     int     i;
     char    buf;
-    char    inst[MEMORY];
 
     for (i = 0; read(fd, &buf, 1); i++)
-        inst[i] = buf;
-    inst[i] = '\0';
-    instructions(inst);
+        cursor.inst[i] = buf;
+    cursor.inst[i] = '\0';
+    instructions(cursor.inst, cursor);
     close(fd);
 }
 
-/* Fonction principale */
+/* Programme */
 int         main(int argc, char **argv)
 {
-    int     fd;
+    int         fd;
+    t_cursor    cursor;
 
+    cursor.pos = 0;
+    for (cursor.i = 0; cursor.i <= MEMORY; cursor.i++)
+        cursor.mem[cursor.i] = '\0';
+    cursor.i = 0;
     if (argc != 2)
     {
         d_errors(1);
@@ -78,8 +95,8 @@ int         main(int argc, char **argv)
     }
     fd = open(argv[1], O_RDONLY);
     if (fd != -1)
-        open_file(fd);
+        open_file(fd, cursor);
     else
-        instructions(argv[1]);
+        instructions(argv[1], cursor);
     return (0);
 }

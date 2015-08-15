@@ -9,6 +9,8 @@
 
 typedef struct	s_cursor
 {
+	char        inst[MEMORY];
+	int         i;
     int         mem[MEMORY];
     int         pos;
     int         loop;
