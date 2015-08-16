@@ -26,12 +26,12 @@ t_cursor    cursor_update(t_cursor cursor, char *op)
         case ('-') : cursor.mem[cursor.pos]--; break;
         case ('.') : d_char((char)cursor.mem[cursor.pos], 1); break;
         case ('[') :
-			if (cursor.mem[cursor.pos] == '\0')
-			{
-				while (op[cursor.i] != ']')
-					cursor.i++;
-				break;
-			}
+            if (cursor.mem[cursor.pos] == '\0')
+            {
+                while (op[cursor.i] != ']')
+                    cursor.i++;
+                break;
+            }
             cursor.i++;
             cursor.loop = 1;
             break;
@@ -51,6 +51,10 @@ t_cursor    instructions(char *inst, t_cursor cursor)
     while (inst[cursor.i])
     {
         cursor = cursor_update(cursor, inst);
+        if (cursor.pos < 0)
+            cursor.pos = MEMORY - 1;
+        else if (cursor.pos >= MEMORY)
+            cursor.pos = 0;
         switch (cursor.loop)
         {
             case (1) :
@@ -104,5 +108,7 @@ int         main(int argc, char **argv)
         open_file(fd, cursor);
     else
         instructions(argv[1], cursor);
+    /* Newline de debuf
+    d_char('\n', 1);*/
     return (0);
 }
