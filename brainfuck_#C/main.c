@@ -55,6 +55,10 @@ t_cursor    instructions(char *inst, t_cursor cursor)
             cursor.pos = MEMORY - 1;
         else if (cursor.pos >= MEMORY)
             cursor.pos = 0;
+		if (cursor.mem[cursor.pos] > 127)
+			cursor.mem[cursor.pos] = 0;
+		else if (cursor.mem[cursor.pos] < 0)
+			cursor.mem[cursor.pos] = 127;
         switch (cursor.loop)
         {
             case (1) :
