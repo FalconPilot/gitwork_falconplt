@@ -112,7 +112,7 @@ int         main(int argc, char **argv)
         open_file(fd, cursor);
     else
         instructions(argv[1], cursor);
-    /* Newline de debuf
+    /* Newline de debug
     d_char('\n', 1);*/
     return (0);
 }
