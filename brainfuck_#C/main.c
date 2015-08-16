@@ -26,6 +26,12 @@ t_cursor    cursor_update(t_cursor cursor, char *op)
         case ('-') : cursor.mem[cursor.pos]--; break;
         case ('.') : d_char((char)cursor.mem[cursor.pos], 1); break;
         case ('[') :
+			if (cursor.mem[cursor.pos] == '\0')
+			{
+				while (op[cursor.i] != ']')
+					cursor.i++;
+				break;
+			}
             cursor.i++;
             cursor.loop = 1;
             break;
