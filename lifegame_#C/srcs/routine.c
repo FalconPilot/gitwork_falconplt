@@ -11,16 +11,26 @@ lifegrid    swap_grid(lifegrid grid)
 
 int         calc_cell(lifegrid grid, int i, int line)
 {
+    int     x;
     int     next;
 
+    x = i - line * grid.x;
     next = 0;
     if (i > 0 && grid.grid[i - 1] == 'x')
         next++;
     if (grid.grid[i + 1] == 'x')
         next++;
+    if (line < grid.y && x < (grid.x - 1) && grid.grid[i + grid.x + 2] == 'x')
+        next++;
     if (line < grid.y && grid.grid[i + grid.x + 1] == 'x')
         next++;
+    if (line < grid.y && grid.grid[i + grid.x] == 'x')
+        next++;
+    if (line > 0 && i > 0 && grid.grid[i - grid.x - 2] == 'x')
+        next++;
     if (line > 0 && grid.grid[i - grid.x - 1] == 'x')
+        next++;
+    if (line > 0 && grid.grid[i - grid.x] == 'x')
         next++;
     return (next);
 }
