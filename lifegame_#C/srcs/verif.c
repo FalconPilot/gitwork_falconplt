@@ -13,9 +13,8 @@ char        *fill_grid(int size, char *filename)
     if (fd == -1)
         exit(EXIT_FAILURE);
     for (i = 0; read(fd, &buf, 1); i++)
-    {
         ret[i] = buf;
-    }
+    close(fd);
     return (ret);
 }
 
