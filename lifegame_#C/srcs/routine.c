@@ -52,14 +52,19 @@ void        routine(lifegrid grid)
         {
             next = calc_cell(grid, i, line);
             if (next == 3)
+            {
+                count++;
                 grid.next[i] = 'x';
+            }
         }
         else if (grid.grid[i] == 'x')
         {
-            count++;
             next = calc_cell(grid, i, line);
             if (next != 2 && next != 3)
+            {
+                count++;
                 grid.next[i] = '.';
+            }
         }
         else if (grid.grid[i] == '\n')
             line++;
@@ -69,7 +74,7 @@ void        routine(lifegrid grid)
     printf("\n");
     if (count == 0)
     {
-        printf("There are only dead cells left !\n");
+        printf("No more moves possible !\n");
         exit(EXIT_SUCCESS);
     }
     routine(grid);
