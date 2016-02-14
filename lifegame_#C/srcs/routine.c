@@ -1,81 +1,108 @@
 #include <main.h>
 
-lifegrid    swap_grid(lifegrid grid)
-{
-    int     i;
+int
+sync_grid(lifegrid *grid) {
+    int i;
+    int diff;
 
-    for (i = 0; grid.next[i]; i++)
-        grid.grid[i] = grid.next[i];
-    return (grid);
+    diff = 0;
+    for (i = 0; i < grid->size; i++) {
+        if (grid->current[i] != grid->next[i]) {
+            diff++;
+        }
+        grid->current[i] = grid->next[i];
+    }
+    return (diff);
 }
 
-int         calc_cell(lifegrid grid, int i, int line)
-{
-    int     x;
-    int     next;
+int
+calc_cell(lifegrid grid, int i, int line) {
+    int next;
 
-    x = i - line * grid.x;
     next = 0;
-    if (i > 0 && grid.grid[i - 1] == 'x')
+    // Top-left
+    if (line > 1 && i % grid.x != 0 && grid.current[i - grid.x - 1] == CELL_LIVE) {
         next++;
-    if (grid.grid[i + 1] == 'x')
+    }
+    // Top-middle
+    if (line > 1 && grid.current[i - grid.x] == CELL_LIVE) {
         next++;
-    if (line < grid.y && x < (grid.x - 1) && grid.grid[i + grid.x + 2] == 'x')
+    }
+    // Top-right
+    if (line > 1 && i % grid.x != grid.x && grid.current[i - grid.x + 1] == CELL_LIVE) {
         next++;
-    if (line < grid.y && grid.grid[i + grid.x + 1] == 'x')
+    }
+    // Middle-left
+    if (i % grid.x != 0 && grid.current[i - 1] == CELL_LIVE) {
         next++;
-    if (line < grid.y && grid.grid[i + grid.x] == 'x')
+    }
+    // Middle-right
+    if (i % grid.x != grid.x && grid.current[i + 1] == CELL_LIVE) {
         next++;
-    if (line > 0 && i > 0 && grid.grid[i - grid.x - 2] == 'x')
+    }
+    // Bottom-left
+    if (line < grid.y && i % grid.x != 0 && grid.current[i + grid.x - 1] == CELL_LIVE) {
         next++;
-    if (line > 0 && grid.grid[i - grid.x - 1] == 'x')
+    }
+    // Bottom-middle
+    if (line < grid.y && grid.current[i + grid.x] == CELL_LIVE) {
         next++;
-    if (line > 0 && grid.grid[i - grid.x] == 'x')
+    }
+    // Bottom-right
+    if (line < grid.y && i % grid.x != grid.x && grid.current[i + grid.x + 1] == CELL_LIVE) {
         next++;
-    return (next);
+    }
+    if (next == 2) {
+        return (grid.current[i]);
+    }
+    else if (next == 3) {
+        return (CELL_LIVE);
+    }
+    else {
+        return (CELL_DEAD);
+    }
 }
 
-void        routine(lifegrid grid)
-{
-    int     i;
-    int     count;
-    int     next;
-    int     line;
+void
+display_grid(lifegrid grid) {
+    int i;
+
+    for (i = 0; i < grid.size; i++) {
+        if (i % grid.x == 0) {
+            printf("\n");
+        }
+        if (grid.current[i] == CELL_DEAD) {
+            printf(".");
+        }
+        else {
+            printf("x");
+        }
+    }
+    printf("\n");
+}
+
+void
+terminate_routine(void) {
+    printf("\nNo more moves possible !\n");
+    exit(EXIT_SUCCESS);
+}
+
+void
+routine(lifegrid grid) {
+    int i;
+    int line;
 
     line = 0;
-    count = 0;
-    for (i = 0; grid.grid[i]; i++)
-    {
-        printf("%c", grid.grid[i]);
-        next = 0;
-        if (grid.grid[i] == '.')
-        {
-            next = calc_cell(grid, i, line);
-            if (next == 3)
-            {
-                count++;
-                grid.next[i] = 'x';
-            }
-        }
-        else if (grid.grid[i] == 'x')
-        {
-            next = calc_cell(grid, i, line);
-            if (next != 2 && next != 3)
-            {
-                count++;
-                grid.next[i] = '.';
-            }
-        }
-        else if (grid.grid[i] == '\n')
+    for (i = 0; i < grid.size; i++) {
+        if (i % grid.x == 0) {
             line++;
+        }
+        grid.next[i] = calc_cell(grid, i, line);
+    }
+    display_grid(grid);
+    if (sync_grid(&grid) == 0) {
+        terminate_routine();
     }
     sleep(1);
-    grid = swap_grid(grid);
-    printf("\n");
-    if (count == 0)
-    {
-        printf("No more moves possible !\n");
-        exit(EXIT_SUCCESS);
-    }
     routine(grid);
 }

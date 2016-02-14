@@ -2,20 +2,20 @@
 
 # Variables
 
-NAME =      lifegame
+NAME = lifegame
 
-IDIR =      ./incs
+IDIR = ./incs
 
-FLAG =      -Wall -Wextra -Werror -I$(IDIR)
+FLAG = -Wall -Wextra -Werror -I$(IDIR)
 
-SRCS =      main.c      \
-            verif.c     \
-            routine.c
-SDIR =      srcs/
+SRCS = main.c   \
+       verif.c  \
+       routine.c
+SDIR = srcs/
 
-OBJS =      $(SRCS:.c=.o)
-ODIR =      objs/
-OBCC =      $(addprefix $(ODIR),$(OBJS))
+OBJS = $(SRCS:.c=.o)
+ODIR = objs/
+OBCC = $(addprefix $(ODIR),$(OBJS))
 
 # Rules
 
