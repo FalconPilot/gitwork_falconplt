@@ -83,7 +83,7 @@ display_grid(lifegrid grid) {
 
 void
 terminate_routine(void) {
-    printf("\nNo more moves possible !\n");
+    printf("\nNo more moves possible !\n\n");
     exit(EXIT_SUCCESS);
 }
 
