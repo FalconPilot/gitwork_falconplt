@@ -82,12 +82,6 @@ display_grid(lifegrid grid) {
 }
 
 void
-terminate_routine(void) {
-    printf("\nNo more moves possible !\n\n");
-    exit(EXIT_SUCCESS);
-}
-
-void
 routine(lifegrid grid) {
     int i;
     int line;
@@ -101,8 +95,10 @@ routine(lifegrid grid) {
     }
     display_grid(grid);
     if (sync_grid(&grid) == 0) {
-        terminate_routine();
+        printf("\nNo more moves possible !\n\n");
     }
-    sleep(1);
-    routine(grid);
+    else {
+       sleep(1);
+       routine(grid);
+    }
 }
