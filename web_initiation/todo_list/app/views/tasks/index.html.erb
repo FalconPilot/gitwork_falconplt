@@ -15,7 +15,11 @@
     <% @tasks.each do |task| %>
       <tr>
         <td><%= task.description %></td>
-        <td><%= task.done? %></td>
+        <td>
+          <div class="<%= task.done?.downcase %>">
+            <%= task.done? %>
+          </div>
+        </td>
         <td>
           <%= form_for(task) do |f| %>
             <%= f.hidden_field(:done, :value => !task.done) %>

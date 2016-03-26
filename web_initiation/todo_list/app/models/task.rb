@@ -1,17 +1,13 @@
 class Task < ActiveRecord::Base
+
   def done?(reverse=false)
+    valtrue = "Completed"
+    valfalse = "Pending"
     if !reverse
-      return (@done.nil? ? "Pending" : "Completed")
+      return (self.done ? valtrue : valfalse)
     else
-      return (@done.nil? ? "Completed" : "Pending")
+      return (self.done ? valfalse : valtrue)
     end
   end
 
-  def switch
-    @done = true
-  end
-
-  def obj
-    return self
-  end
 end
