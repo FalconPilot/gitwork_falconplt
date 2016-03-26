@@ -16,10 +16,7 @@
       <tr>
         <td><%= task.description %></td>
         <td><%= task.done? %></td>
-        <td><%= form_for(task) do |t| %>
-            <%= params[:task] = task %>
-          <%= t.submit %>
-        <% end %></td>
+        <td><%= link_to "Set as #{task.done?(true)}", flop_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
