@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :flop, :update, :destroy]
+  before_action :set_task, only: [:show, :switch, :update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
@@ -36,10 +36,8 @@ class TasksController < ApplicationController
     end
   end
 
-  def flop
-    @task.done = !@task.done
-    @task.save
-    redirect_to root_path
+  def switch
+    @task.update_attributes(done: params[:done])
   end
 
   # PATCH/PUT /tasks/1

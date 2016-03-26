@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   resources :tasks do
-    member do
-      get :flop
-    end
+    post :switch
   end
   get 'main/index'
 
