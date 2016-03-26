@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :status, :update, :destroy]
+  before_action :set_task, only: [:show, :flop, :update, :destroy]
 
   # GET /tasks
   # GET /tasks.json
@@ -36,24 +36,23 @@ class TasksController < ApplicationController
     end
   end
 
+  def flop
+    @task.done = !@task.done
+    @task.save
+    redirect_to root_path
+  end
+
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Task was successfully updated.' }
         format.json { render :index, status: :ok, location: @task }
       else
         format.html { render :edit }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  def status
-    @task.update(task_params)
-    respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully toggled' }
     end
   end
 

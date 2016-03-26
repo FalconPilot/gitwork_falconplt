@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :tasks
+  resources :tasks do
+    member do
+      get :flop
+    end
+  end
   get 'main/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

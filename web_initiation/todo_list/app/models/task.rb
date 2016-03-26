@@ -1,9 +1,9 @@
 class Task < ActiveRecord::Base
-  def done?
-    if @done.nil?
-      return "Pending"
+  def done?(reverse=false)
+    if !reverse
+      return (@done.nil? ? "Pending" : "Completed")
     else
-      return "Completed"
+      return (@done.nil? ? "Completed" : "Pending")
     end
   end
 
