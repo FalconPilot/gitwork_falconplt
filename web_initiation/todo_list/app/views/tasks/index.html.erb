@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Task list</h1>
+
+<table class="task_table">
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.description %></td>
+        <td><%= task.done? %></td>
+        <td><%= form_for(task) do |t| %>
+            <%= params[:task] = task %>
+          <%= t.submit %>
+        <% end %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<center><%= link_to 'New Task', new_task_path %></center>
