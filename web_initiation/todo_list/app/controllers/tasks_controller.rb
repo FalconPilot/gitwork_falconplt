@@ -5,6 +5,7 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     @tasks = Task.all
+    sort
   end
 
   # GET /tasks/1
@@ -36,14 +37,13 @@ class TasksController < ApplicationController
     end
   end
 
-  def switch
-    @task.update_attributes(done: params[:done])
+  def sort
+    @tasks = @tasks.sort_by { |h| [h[:done] ? 0 : 1,h[:id]] }.reverse
   end
 
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
-    switch
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to root_path, notice: 'Task was successfully updated.' }
