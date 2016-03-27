@@ -1,19 +1,19 @@
 <h1>Welcome</h1>
-<%= @file.each do |data| %>
-  <table class="languages">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Website</th>
-      </tr>
-    </thead>
-    <tbody>
+<table class="languages">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Website</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= @disp.each do |data| %>
       <tr>
         <td><div><%= data["name"] %></div></td>
         <td><div><%= data["desc"] %></div></td>
-        <td><div><%= data["site"] %></div></td>
+        <td><div><%= link_to data["site"], data["site"], target: "_blank" %></div></td>
       </tr>
-    </tbody>
-  </table>
-<% end %>
+  <% end %>
+  </tbody>
+</table>
