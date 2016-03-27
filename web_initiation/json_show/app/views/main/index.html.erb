@@ -1,2 +1,19 @@
 <h1>Welcome</h1>
-<%= jshow %>
+<%= @file.each do |data| %>
+  <table class="languages">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Website</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div><%= data["name"] %></div></td>
+        <td><div><%= data["desc"] %></div></td>
+        <td><div><%= data["site"] %></div></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
