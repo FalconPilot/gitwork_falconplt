@@ -1,0 +1,35 @@
+// Place all the styles related to the livres controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.library {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.library tbody tr {
+  height: 100px;
+}
+
+.library td {
+  padding: 5px;
+  border: 1px dotted;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+.row1 {
+  width: 150px;
+}
+
+.row2 {
+  width: 500px;
+}
+
+.row3 {
+  width: 100px;
+}

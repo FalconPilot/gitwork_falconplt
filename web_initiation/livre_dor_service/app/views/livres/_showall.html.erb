@@ -1,0 +1,19 @@
+<table class="library">
+  <thead>
+    <th>User</th>
+    <th>Message</th>
+  </thead>
+  <% @livres.each do |livre| %>
+    <tr>
+      <td class="row1">
+        <%= livre.username %>
+      </td>
+      <td class="row2">
+        <%= livre.msg %>
+      </td>
+      <td class="row3">
+        <%= link_to 'Delete', livre, method: 'delete' %>
+      </td>
+    </tr>
+  <% end %>
+</table>
