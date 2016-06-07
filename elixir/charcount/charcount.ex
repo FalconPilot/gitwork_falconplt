@@ -39,4 +39,5 @@ defmodule Charcount do
 
 end
 
-IO.inspect Charcount.count("Coucou")
+str = String.strip(IO.gets("Enter string :\n"))
+IO.inspect(Charcount.count str)
