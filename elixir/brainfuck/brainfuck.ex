@@ -1,6 +1,6 @@
 defmodule BF do
 
-  # Global instructions parsing
+  # Instructions parsing
   def parse(str) do
     parse(String.codepoints(str), [])
   end
@@ -9,7 +9,6 @@ defmodule BF do
     Enum.reverse(acc)
   end
 
-  # Parse instructions
   def parse(["+"|t], acc) do
     parse(t, [:plus|acc])
   end
