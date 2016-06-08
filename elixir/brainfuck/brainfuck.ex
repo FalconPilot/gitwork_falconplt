@@ -48,6 +48,72 @@ defmodule BF do
     parse(t, acc)
   end
 
+  # Interpreter
+  def compute(list) do
+    mem = Enum.map(1..30000, fn _ ->
+      0
+    end)
+    compute(list, mem, 0)
+  end
+
+  def compute([:plus|t], mem, index) do
+    val = Enum.at(mem, index)
+    if val >= 255 do
+      val = -1
+    end
+    mem = List.delete_at(mem, index)
+    mem = List.insert_at(mem, index, val + 1)
+    compute(t, mem, index)
+  end
+
+  def compute([:minus|t], mem, index) do
+    val = Enum.at(mem, index)
+    if val <= 0 do
+      val = 256
+    end
+    mem = List.delete_at(mem, index)
+    mem = List.insert_at(mem, index, val - 1)
+    compute(t, mem, index)
+  end
+
+  def compute([:left|t], mem, index) do
+    if index <= 0 do
+      index = 30000
+    end
+    compute(t, mem, index - 1)
+  end
+
+  def compute([:right|t], mem, index) do
+    if index >= 29999 do
+      index = -1
+    end
+    compute(t, mem, index + 1)
+  end
+
+  def compute([{tuple}|t], mem, index) do
+    data = compute(tuple, mem, index)
+    mem = Map.fetch!(data, :mem)
+    index = Map.fetch!(data, :index)
+    val = Enum.at(mem, index)
+    if val == 0 do
+      compute(t, mem, index)
+    else
+      compute([{tuple}|t], mem, index)
+    end
+  end
+
+  def compute([:output|t], mem, index) do
+    data = Enum.at(mem, index)
+    IO.write(<<data>>)
+    compute(t, mem, index)
+  end
+
+  def compute([], mem, index) do
+    %{mem: mem, index: index}
+  end
+
 end
 
-IO.inspect BF.parse("+-+-[++[<>+-]--],.")
+str = String.strip(IO.gets("Enter BF code here :\n"))
+list = BF.parse(str)
+BF.compute(list)
