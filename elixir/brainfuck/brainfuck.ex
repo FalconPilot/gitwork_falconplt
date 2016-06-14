@@ -1,6 +1,6 @@
 defmodule BF do
 
-  # Instructions parsing
+  # Parser
   def parse(str) do
     parse(String.codepoints(str), [])
   end
