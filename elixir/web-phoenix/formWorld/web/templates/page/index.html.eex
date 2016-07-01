@@ -1,0 +1,9 @@
+<%= form_for @conn, "/hello", [as: NAME], fn f -> %>
+  <!-- Name input -->
+  <label>What's your name ?</label>
+  <%= text_input f, :name %>
+  <!-- Submit -->
+  <div class="input_wrapper">
+    <%= submit "Greet me !" %>
+  </div>
+<% end %>
