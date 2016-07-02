@@ -1,4 +1,6 @@
 <h1>Voici du JSON</h1>
+<h2>Fetching from <%= link @url, to: @url %></h2>
+<hr>
 <div class="list_wrapper">
   <%= for elem <- @products do %>
   <table class="products">
@@ -9,7 +11,7 @@
         </td>
         <td class="table-content">
         <%= if check_url elem[key] do %>
-          <%= link elem[key], to: elem[key] %>
+          <%= link elem[key], to: elem[key], target: "_blank" %>
         <% else %>
           <%= elem[key] %>
         <% end %>

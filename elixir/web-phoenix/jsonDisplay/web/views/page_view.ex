@@ -6,7 +6,7 @@ defmodule JsonDisplay.PageView do
     Map.keys map
   end
 
-  # Check if URL is valid
+  # Check if a string is a valid URL
   def check_url(str) do
     check_url String.codepoints(str), ""
   end
@@ -19,7 +19,7 @@ defmodule JsonDisplay.PageView do
     end
   end
 
-  def check_url([], acc) do
+  def check_url([], _acc) do
     false
   end
 

@@ -16,10 +16,11 @@ defmodule JsonDisplay.PageController do
 
   # Render index page
   def index(conn, _params) do
-    raw = loadjson("http://atelier-prog.github.io/topics/products.json")
-    IO.inspect raw
+    url = "http://atelier-prog.github.io/topics/products.json"
+    raw = loadjson(url)
     conn
     |> assign(:products, raw)
+    |> assign(:url, url)
     |> render "index.html"
   end
 
