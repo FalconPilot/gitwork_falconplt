@@ -11,4 +11,10 @@ defmodule FormWorld.PageController do
     |> render "hello.html"
   end
 
+  def hello(conn, _params) do
+    conn
+    |> assign(:username, "World")
+    |> render "hello.html"
+  end
+
 end
