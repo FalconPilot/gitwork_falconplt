@@ -1,0 +1,32 @@
+/*
+**  Generic classes
+*/
+
+body {
+  margin: 0;
+}
+
+.list_wrapper {
+  position: relative;
+  margin: 5px auto;
+  width: 30%;
+}
+
+.products {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.table-label, .table-content {
+  padding: 3px;
+  border: 1px solid #000;
+  text-align: center;
+}
+
+.table-label {
+  width: 50px;
+}
+
+.table-content {
+  text-align: right;
+}

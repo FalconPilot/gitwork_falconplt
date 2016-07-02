@@ -1,0 +1,21 @@
+<h1>Voici du JSON</h1>
+<div class="list_wrapper">
+  <%= for elem <- @products do %>
+  <table class="products">
+    <%= for key <- map_keys elem do %>
+      <tr>
+        <td class="table-label">
+          <%= String.capitalize key %>
+        </td>
+        <td class="table-content">
+        <%= if check_url elem[key] do %>
+          <%= link elem[key], to: elem[key] %>
+        <% else %>
+          <%= elem[key] %>
+        <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <% end %>
+</div>
