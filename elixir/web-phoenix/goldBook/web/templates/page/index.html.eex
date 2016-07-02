@@ -1,0 +1,28 @@
+<h1>Livre d'or</h1>
+<%= if @notice do %>
+  <div class="notice">
+    <%= @notice %>
+  </div>
+<% end %>
+<%= form_for @changeset, "/new", [class: "new-msg-form"], fn f -> %>
+  <label>Nom</label>
+  <%= text_input f, :user %>
+  <label>Message</label>
+  <%= textarea f, :content %>
+  <%= submit "Poster", [class: "button-custom"] %>
+<% end %>
+<hr/>
+<%= button("Effacer le livre d'or", to: "/destroy", class: "button-custom") %>
+<div class="msg-wrapper">
+  <%= for msg <- @messages do %>
+    <div class="msg-box">
+      <span class="msg-content">
+        « <%= msg.content %> »
+      </span>
+      &nbsp;-&nbsp;
+      <span class="msg-user">
+        <%= msg.user %>
+      </span>
+    </div>
+  <% end %>
+</div>
