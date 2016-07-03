@@ -16,7 +16,7 @@ defmodule TodoList.PageController do
   def switch(conn, %{"id" => id}) do
     task = Repo.get!(Task, id)
     task = Ecto.Changeset.change task, status: task.status
-    Repo.update(task)
+    Repo.update task
     conn
     |> redirect(to: "/")
   end
