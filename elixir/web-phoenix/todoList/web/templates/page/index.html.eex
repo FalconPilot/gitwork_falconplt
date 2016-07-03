@@ -1,0 +1,16 @@
+<h1>Todo List</h1>
+<%= form_for @changeset, "/new", [class: "new-task-form"],fn f -> %>
+  <label>Task description</label>
+  <%= text_input f, :content, [class: "textbox"] %>
+  <%= submit "Create task" %>
+<% end %>
+<hr/>
+<%= for task <- @tasklist do %>
+  <div class="task-wrapper">
+    <div class="task-desc">
+      <%= task.content %>
+    </div>
+    <%= content_tag(:div, get_status(task.status), [class: get_class(task.status)]) %>
+    <%= button("Switch status", to: get_route("/switch/", task.id)) %>
+  </div>
+<% end %>
