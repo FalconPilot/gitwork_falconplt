@@ -11,6 +11,9 @@
       <%= task.content %>
     </div>
     <%= content_tag(:div, get_status(task.status), [class: get_class(task.status)]) %>
-    <%= button("Switch status", to: get_route("/switch/", task.id)) %>
+    <div class="buttons-wrapper">
+      <%= button("Switch status", to: get_route("/switch/", task.id), class: "button-custom") %>
+      <%= button("Delete task", to: get_route("/destroy/", task.id), class: "button-custom") %>
+    </div>
   </div>
 <% end %>

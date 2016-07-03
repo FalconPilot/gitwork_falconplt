@@ -21,6 +21,14 @@ defmodule TodoList.PageController do
     |> redirect(to: "/")
   end
 
+  # Destroy entry
+  def destroy(conn, %{"id" => id}) do
+    task = Repo.get!(Task, id)
+    Repo.delete(task)
+    conn
+    |> redirect(to: "/")
+  end
+
   # Index
   def index(conn, _params) do
     changeset = Task.changeset(%Task{})
