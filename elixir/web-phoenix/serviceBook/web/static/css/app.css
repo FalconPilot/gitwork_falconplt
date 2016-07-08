@@ -1,0 +1,15 @@
+/*
+**  CSS Variables
+*/
+
+:root {
+  --bg-color: #DDD;
+}
+
+/*
+**  Regular classes
+*/
+
+body {
+  background-color: var(--bg-color);
+}
