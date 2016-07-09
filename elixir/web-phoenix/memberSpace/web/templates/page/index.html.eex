@@ -1,0 +1,1 @@
+<h1>Hello, register me <%= link "here", to: "/register" %></h1>
