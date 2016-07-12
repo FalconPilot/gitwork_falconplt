@@ -4,6 +4,6 @@
   Email
   <%= text_input f, :email %>
   Mot de passe
-  <%= text_input f, :password %>
+  <%= password_input f, :password %>
   <%= submit "Register me" %>
 <% end %>

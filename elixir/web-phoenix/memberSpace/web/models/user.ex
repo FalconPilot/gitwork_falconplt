@@ -28,6 +28,7 @@ defmodule MemberSpace.User do
     |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 8)
   end
+
 end
 
 # Member registration module

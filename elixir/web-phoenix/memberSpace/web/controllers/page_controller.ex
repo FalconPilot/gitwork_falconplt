@@ -22,12 +22,26 @@ defmodule MemberSpace.PageController do
   def new(conn, %{"user" => user_params}) do
     changeset = User.changeset(%User{}, user_params)
     case MemberSpace.Registration.create(changeset, MemberSpace.Repo) do
-      {:ok, changeset} ->
+      {:ok, _changeset} ->
+        conn
+        |> put_flash(:info, "Compte créé :v")
+        |> redirect(to: "/")
+      {:error, _changeset} ->
+        conn
+        |> put_flash(:info, "Compte invalide")
+        |> redirect(to: "/register")
+    end
+  end
+
+  # Render login
+  def login(conn, _params) do
+    case get_session(conn, :current_user) do
+      nil ->
+        conn
+        |> render("login.html")
+      _   ->
         conn
         |> redirect(to: "/")
-      {:error, changeset} ->
-        conn
-        |> redirect(to: "/register")
     end
   end
 

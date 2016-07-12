@@ -1,5 +1,10 @@
 <h1>Hello, register me <%= link "here", to: "/register" %></h1>
 <hr>
+<%= if logged_in?(@conn) do %>
+  <%= link "Log me out", to: "/drop", method: "post" %>
+<% else %>
+  <%= link "Log me in", to: "/login" %>
+<% end %>
 <h2>Userlist</h2>
 <ul>
 <%= for user <- @userlist do %>

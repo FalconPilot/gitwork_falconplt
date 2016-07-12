@@ -10,6 +10,12 @@
   </head>
   <!-- BODY -->
   <body>
+    <!-- Notices -->
+    <h3><%= get_flash(@conn, :info) %></h3>
+    <!-- Header -->
+    <%= if logged_in?(@conn) do %>
+      <h4>Hello, <%= get_username(@conn) %></h4>
+    <% end %>
     <!-- Main content -->
     <main role="main">
       <%= render @view_module, @view_template, assigns %>

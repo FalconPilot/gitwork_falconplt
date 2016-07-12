@@ -24,6 +24,8 @@ defmodule MemberSpace.Router do
 
     # Post routes
     post  "/new",       PageController,   :new
+    post  "/log",       SessionControl,   :log
+    post  "/drop",      SessionControl,   :drop
   end
 
   # Other scopes may use custom stacks.

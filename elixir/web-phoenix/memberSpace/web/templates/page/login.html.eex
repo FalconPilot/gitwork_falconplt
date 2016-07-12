@@ -1,0 +1,7 @@
+<%= form_for @conn, "/log", [name: :session], fn f -> %>
+  Adresse mail
+  <%= text_input f, :email %>
+  Mot de passe
+  <%= password_input f, :password %>
+  <%= submit "Log me in" %>
+<% end %>
