@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- HEAD -->
+  <head>
+    <!-- Begin meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- End Meta -->
+    <title>Log yourself asynchronously !</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+  <!-- BODY -->
+  <body>
+    <!-- Global header -->
+    <div class="header-wrapper">
+      <%= form_for @changeset, "/", [class: "header-form"], fn f -> %>
+        <div class="login-row">
+          <label>Username</label>
+          <%= text_input f, :username, [id: "username-login"] %>
+          <label>Password</label>
+          <%= password_input f, :password, [id: "password-login"] %>
+        </div>
+        <div id="login-btn" class="btn">Log me in !</div>
+      <% end %>
+      <hr class="vr">
+      <%= form_for @changeset, "/", [class: "header-form"], fn f -> %>
+        <div class="register-row">
+          <label>Username</label>
+          <%= text_input f, :username, [id: "username-register"] %>
+          <label>Mail</label>
+          <%= text_input f, :email, [id: "email-register"] %>
+          <label>Password</label>
+          <%= password_input f, :password, [id: "password-register"] %>
+          <label>Confirm password</label>
+          <%= password_input f, :password, [id: "password-confirm"] %>
+        </div>
+        <div id="register-btn" class="btn">Register me !</div>
+      <% end %>
+    </div>
+    <!-- Main content -->
+    <main role="main">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
+    <!-- Scripts -->
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>
