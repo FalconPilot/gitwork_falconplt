@@ -5,9 +5,4 @@
 <% else %>
   <%= link "Log me in", to: "/login" %>
 <% end %>
-<h2>Userlist</h2>
-<ul>
-<%= for user <- @userlist do %>
-  <li><%= user.username %></li>
-<% end %>
-</ul>
+<h2><%= link "Userlist", to: "/mlist" %></h2>

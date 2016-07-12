@@ -17,9 +17,12 @@
     </div>
     <% end %>
     <!-- Header -->
-    <%= if logged_in?(@conn) do %>
-      <h4>Hello, <%= get_username(@conn) %></h4>
-    <% end %>
+    <h4>
+      <%= link "Index", to: "/" %>
+      <%= if logged_in?(@conn) do %>
+        (<%= get_username(@conn) %>)
+      <% end %>
+    </h4>
     <!-- Main content -->
     <main role="main">
       <%= render @view_module, @view_template, assigns %>

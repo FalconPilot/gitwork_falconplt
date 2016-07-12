@@ -1,0 +1,5 @@
+<h1>Profil de <%= @pageuser.username %></h1>
+<%= if profile_owned(@conn, @pageuser) do %>
+  Ce profil est à vous
+  <%= button "Edit", to: edit_path(@pageuser) %>
+<% end %>

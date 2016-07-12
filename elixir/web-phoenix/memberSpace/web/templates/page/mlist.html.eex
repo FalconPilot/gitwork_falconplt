@@ -1,0 +1,6 @@
+<h2>Userlist</h2>
+<ul>
+<%= for user <- @userlist do %>
+  <li><%= link user.username, to: user_path(user) %></li>
+<% end %>
+</ul>

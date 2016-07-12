@@ -4,9 +4,7 @@ defmodule MemberSpace.PageController do
 
   # Index rendering
   def index(conn, _params) do
-    userlist = Repo.all(User)
     conn
-    |> assign(:userlist, userlist)
     |> render("index.html")
   end
 
@@ -42,6 +40,43 @@ defmodule MemberSpace.PageController do
       _   ->
         conn
         |> redirect(to: "/")
+    end
+  end
+
+  # Render memberlist
+  def mlist(conn, _params) do
+    userlist = Repo.all(User)
+    conn
+    |> assign(:userlist, userlist)
+    |> render("mlist.html")
+  end
+
+  # Render memberpage
+  def member(conn, %{"id" => id}) do
+    user = Repo.get(User, id)
+    case user do
+      nil ->
+        conn
+        |> put_flash(:info, "Profil inconnu")
+        |> redirect(to: "/")
+      _   ->
+        conn
+        |> assign(:pageuser, user)
+        |> render("member.html")
+    end
+  end
+
+  # Render edit page
+  def edit(conn, %{"id" => id}) do
+    user = Repo.get(User, id)
+    case user do
+      nil ->
+        conn
+        |> put_flash(:info, "Profil inconnu")
+        |> redirect(to: "/")
+      _   ->
+        conn
+        |> render("edit.html")
     end
   end
 

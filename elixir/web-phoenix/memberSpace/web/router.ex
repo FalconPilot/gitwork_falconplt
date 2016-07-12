@@ -17,15 +17,18 @@ defmodule MemberSpace.Router do
     pipe_through :browser # Use the default browser stack
 
     # Get routes
-    get   "/",          PageController,   :index
-    get   "/register",  PageController,   :register
-    get   "/login",     PageController,   :login
-    get   "/logout",    PageController,   :logout
+    get   "/",                PageController,   :index
+    get   "/register",        PageController,   :register
+    get   "/login",           PageController,   :login
+    get   "/logout",          PageController,   :logout
+    get   "/mlist",           PageController,   :mlist
+    get   "/mlist/:id",       PageController,   :member
 
     # Post routes
-    post  "/new",       PageController,   :new
-    post  "/log",       SessionControl,   :log
-    post  "/drop",      SessionControl,   :drop
+    post  "/new",             PageController,   :new
+    post  "/log",             SessionControl,   :log
+    post  "/drop",            SessionControl,   :drop
+    post  "/mlist/:id/edit",  PageController,   :edit
   end
 
   # Other scopes may use custom stacks.
