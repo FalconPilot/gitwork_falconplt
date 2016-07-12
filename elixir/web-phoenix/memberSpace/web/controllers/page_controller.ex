@@ -10,7 +10,7 @@ defmodule MemberSpace.PageController do
     |> render("index.html")
   end
 
-  # Register rendering
+  # Registeration rendering
   def register(conn, _params) do
     changeset = User.changeset(%User{})
     conn
@@ -24,11 +24,9 @@ defmodule MemberSpace.PageController do
     case MemberSpace.Registration.create(changeset, MemberSpace.Repo) do
       {:ok, changeset} ->
         conn
-        |> IO.puts "Registered successfully !"
         |> redirect(to: "/")
       {:error, changeset} ->
         conn
-        |> IO.puts "Bitchy error !"
         |> redirect(to: "/register")
     end
   end
