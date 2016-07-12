@@ -11,7 +11,11 @@
   <!-- BODY -->
   <body>
     <!-- Notices -->
-    <h3><%= get_flash(@conn, :info) %></h3>
+    <%= if (flash = get_flash(@conn, :info)) do %>
+    <div class="flash-wrapper">
+      <h3><%= flash %></h3>
+    </div>
+    <% end %>
     <!-- Header -->
     <%= if logged_in?(@conn) do %>
       <h4>Hello, <%= get_username(@conn) %></h4>
