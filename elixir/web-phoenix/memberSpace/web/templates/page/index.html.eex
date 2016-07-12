@@ -1,1 +1,8 @@
 <h1>Hello, register me <%= link "here", to: "/register" %></h1>
+<hr>
+<h2>Userlist</h2>
+<ul>
+<%= for user <- @userlist do %>
+  <li><%= user.username %></li>
+<% end %>
+</ul>

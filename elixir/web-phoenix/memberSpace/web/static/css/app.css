@@ -13,3 +13,14 @@
 body {
   background-color: var(--bg-color);
 }
+
+main, form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+form input {
+  margin: 4px;
+}

@@ -1,1 +1,9 @@
-Coucou
+<%= form_for @changeset, "/new", fn f -> %>
+  Nom d'utilisateur
+  <%= text_input f, :username %>
+  Email
+  <%= text_input f, :email %>
+  Mot de passe
+  <%= text_input f, :password %>
+  <%= submit "Register me" %>
+<% end %>
