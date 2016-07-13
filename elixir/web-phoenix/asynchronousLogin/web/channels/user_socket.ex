@@ -2,7 +2,7 @@ defmodule AsynchronousLogin.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "user:*", AsynchronousLogin.UserChannel
+  channel "user:*", AsynchronousLogin.SessionChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

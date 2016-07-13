@@ -1,0 +1,13 @@
+<%= form_for @changeset, "/register", [class: "register-form"], fn f -> %>
+  <div class="register-row">
+    <label>Username</label>
+    <%= text_input f, :username, [id: "username-register"] %>
+    <label>Mail</label>
+    <%= text_input f, :email, [id: "email-register"] %>
+    <label>Password</label>
+    <%= password_input f, :password, [id: "password-register"] %>
+    <label>Confirm password</label>
+    <%= password_input f, :password_confirm, [id: "password-confirm"] %>
+    <%= submit "Register me !", [class: "btn"] %>
+  </div>
+<% end %>

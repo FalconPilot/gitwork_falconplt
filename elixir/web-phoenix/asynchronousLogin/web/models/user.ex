@@ -5,13 +5,13 @@ defmodule AsynchronousLogin.User do
     field :username, :string
     field :email, :string
     field :password, :string, virtual: true
-    field :pass_confirm, :string, virtual: true
+    field :password_confirm, :string, virtual: true
     field :encrypted_password, :string
 
     timestamps
   end
 
-  @required_fields ~w(username email encrypted_password)
+  @required_fields ~w(username email password password_confirm)
   @optional_fields ~w()
 
   @doc """
@@ -23,18 +23,21 @@ defmodule AsynchronousLogin.User do
 
   # Model changeset
   def changeset(model, params \\ :empty) do
+    if (params) do
+      IO.inspect params
+    end
     model
     |> cast(params, @required_fields, @optional_fields)
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/@/)
     |> validate_length(:username, min: 3)
     |> validate_length(:password, min: 8)
-    |> validate_similar(:password, :pass_confirm)
+    |> validate_confirmation(:password)
   end
 
   # Check if similar
   defp validate_similar(changeset, a, b) do
-    if (a != b) do
+    if (a !== b) do
       add_error(changeset, :password, "Password isn't similar")
     else
       changeset

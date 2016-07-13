@@ -1,0 +1,3 @@
+<%= for user <- @userlist do %>
+  <%= user.username %>
+<% end %>

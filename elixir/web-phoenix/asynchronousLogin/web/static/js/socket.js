@@ -1,22 +1,16 @@
 import {Socket} from "phoenix"
 
+let socket = new Socket("/socket", {params: {token: window.userToken}})
+
 const login_btn       = document.getElementById('login-btn')
 const register_btn    = document.getElementById('register-btn')
 
-let login_params = {
-  "username":     'username-login',
-  "password":     'password-login'
-}
-
-let register_params = {
-  "username":     'username-register',
-  "email":        'email-register',
-  "password":     'password-register',
-  "pass_confirm": 'password-confirm'
-}
-
-
-let socket = new Socket("/socket", {params: {token: window.userToken}})
+const uname_login     = document.getElementById('username-login')
+const upass_login     = document.getElementById('password-login')
+const uname_register  = document.getElementById('username-register')
+const email_register  = document.getElementById('email-register')
+const upass_register  = document.getElementById('password-register')
+const upass_confirm   = document.getElementById('password-confirm')
 
 // When you connect, you'll often need to authenticate the client.
 // For example, imagine you have an authentication plug, `MyAuth`,
@@ -73,21 +67,13 @@ channel.join()
 export default socket
 
 login_btn.addEventListener("click", function() {
-  let params = get_values(login_params)
-  channel.push("login", params)
+  let login_params = {
+    "username":   uname_login.value,
+    "password":   upass_login.value
+  }
+  channel.push("login", login_params)
 })
 
 register_btn.addEventListener("click", function() {
   channel.push("register", register_params)
 })
-
-function get_values(hash) {
-  let newhash = {}
-  let keys = Object.keys(hash)
-  for (let i = 0; i < keys.length; i++) {
-    let key = keys[i]
-    let id = hash[key]
-    newhash[key] = document.getElementById(id).value
-  }
-  return newhash
-}

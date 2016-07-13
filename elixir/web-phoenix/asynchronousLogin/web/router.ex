@@ -16,7 +16,12 @@ defmodule AsynchronousLogin.Router do
   scope "/", AsynchronousLogin do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get   "/",          PageController,     :index
+    get   "/register",  PageController,     :register
+    get   "/ulist",     PageController,     :userlist
+    post  "/login",     SessionController,  :log
+    post  "/logout",    SessionController,  :drop
+    post  "/register",  SessionController,  :register
   end
 
   # Other scopes may use custom stacks.

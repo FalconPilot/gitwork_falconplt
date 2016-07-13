@@ -1,0 +1,7 @@
+<%= form_for @changeset, "/", [class: "header-form"], fn f -> %>
+  <label>Username</label>
+  <%= text_input f, :username, [id: "username-login"] %>
+  <label>Password</label>
+  <%= password_input f, :password, [id: "password-login"] %>
+  <div id="login-btn" class="btn">Log me in</div>
+<% end %>

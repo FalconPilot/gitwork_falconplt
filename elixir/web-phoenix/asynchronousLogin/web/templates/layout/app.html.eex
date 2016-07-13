@@ -5,39 +5,26 @@
     <!-- Begin meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1" shrink-to-fit="no">
     <!-- End Meta -->
     <title>Log yourself asynchronously !</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
   <!-- BODY -->
   <body>
+    <span style="display: none;" id="csrf"><%= get_csrf_token() %></span>
+    <!-- Flash notices -->
+    <%= if (flash = get_flash(@conn, :info)) do %>
+    <div class="flash-wrapper">
+      <h2 class="flash-notice"><%= flash %></h2>
+    </div>
+    <% end %>
     <!-- Global header -->
-    <div class="header-wrapper">
-      <%= form_for @changeset, "/", [class: "header-form"], fn f -> %>
-        <div class="login-row">
-          <label>Username</label>
-          <%= text_input f, :username, [id: "username-login"] %>
-          <label>Password</label>
-          <%= password_input f, :password, [id: "password-login"] %>
-        </div>
-        <div id="login-btn" class="btn">Log me in !</div>
-      <% end %>
-      <hr class="vr">
-      <%= form_for @changeset, "/", [class: "header-form"], fn f -> %>
-        <div class="register-row">
-          <label>Username</label>
-          <%= text_input f, :username, [id: "username-register"] %>
-          <label>Mail</label>
-          <%= text_input f, :email, [id: "email-register"] %>
-          <label>Password</label>
-          <%= password_input f, :password, [id: "password-register"] %>
-          <label>Confirm password</label>
-          <%= password_input f, :password, [id: "password-confirm"] %>
-        </div>
-        <div id="register-btn" class="btn">Register me !</div>
+    <div class="header-wrapper" id="header">
+      <%= if logged_in?(@conn) do %>
+        <%= render @view_module, "logged_in.html", assigns %>
+      <% else %>
+        <%= render @view_module, "logged_out.html", assigns %>
       <% end %>
     </div>
     <!-- Main content -->
@@ -45,6 +32,7 @@
       <%= render @view_module, @view_template, assigns %>
     </main>
     <!-- Scripts -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
