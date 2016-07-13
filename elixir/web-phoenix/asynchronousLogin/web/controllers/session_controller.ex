@@ -8,8 +8,8 @@ defmodule AsynchronousLogin.SessionController do
       {:ok, user} ->
         conn
         |> put_session(:current_user, user)
-        |> render("index.html")
-        |> text("0")
+        |> redirect(to: "/")
+        text conn, "0"
       :error ->
         text conn, "1"
     end
