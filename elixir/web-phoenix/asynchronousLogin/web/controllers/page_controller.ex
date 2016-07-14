@@ -28,4 +28,12 @@ defmodule AsynchronousLogin.PageController do
     |> render("userlist.html")
   end
 
+  # logged_in
+  def logged_in(conn, _params) do
+    changeset = User.changeset(%User{})
+    conn
+    |> assign(:changeset, changeset)
+    |> render("logged_in.html")
+  end
+
 end

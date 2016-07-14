@@ -19,6 +19,7 @@ defmodule AsynchronousLogin.Router do
     get   "/",          PageController,     :index
     get   "/register",  PageController,     :register
     get   "/ulist",     PageController,     :userlist
+    get   "/logged_in", PageController,     :logged_in
     post  "/login",     SessionController,  :log
     post  "/logout",    SessionController,  :drop
     post  "/register",  SessionController,  :register

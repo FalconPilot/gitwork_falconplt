@@ -6,10 +6,10 @@ defmodule AsynchronousLogin.SessionController do
   def log(conn, session_params) do
     case AsynchronousLogin.Session.login(session_params, AsynchronousLogin.Repo) do
       {:ok, user} ->
+        conn = put_session conn, :current_user, user
         conn
-        |> put_session(:current_user, user)
         |> redirect(to: "/")
-        text conn, "0"
+        text(conn, "0")
       :error ->
         text conn, "1"
     end

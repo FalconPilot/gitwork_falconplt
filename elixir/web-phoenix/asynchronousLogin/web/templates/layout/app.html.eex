@@ -6,13 +6,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1" shrink-to-fit="no">
+    <meta name="csrf" id="csrf" content="<%= get_csrf_token() %>">
     <!-- End Meta -->
     <title>Log yourself asynchronously !</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
   <!-- BODY -->
   <body>
-    <span style="display: none;" id="csrf"><%= get_csrf_token() %></span>
     <!-- Flash notices -->
     <%= if (flash = get_flash(@conn, :info)) do %>
     <div class="flash-wrapper">

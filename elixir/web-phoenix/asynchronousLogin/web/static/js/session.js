@@ -30,12 +30,11 @@ function login_client() {
       'password':   upass_login.value
     },
     success: function(data) {
-      alert(data)
       if (data === "0") {
         let username = uname_login.value
         load_logout(username)
       } else {
-        alert("Identifiants incorrects !")
+        // alert("Identifiants incorrects !")
         uname_login.value = ""
         upass_login.value = ""
       }
@@ -62,7 +61,7 @@ function logout_client() {
 
 // Get CSRF Token
 function getCSRF() {
-  return document.getElementById("csrf").innerHTML
+  return document.getElementById("csrf").content
 }
 
 let fields = {
