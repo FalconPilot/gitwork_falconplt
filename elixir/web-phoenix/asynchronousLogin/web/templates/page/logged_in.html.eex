@@ -1,2 +1,5 @@
+<div>
+  <%= link "Userlist", to: "/ulist", class: "register-btn" %>
+</div>
 <h1 class="welcome">Welcome <%= get_username(@conn) %></h1>
 <div id="logout-btn" class="btn">Log me out</div>
