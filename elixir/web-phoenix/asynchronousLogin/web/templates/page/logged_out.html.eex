@@ -2,7 +2,7 @@
   <%= link "Register", to: "/register", class: "register-btn" %>
   <%= link "Userlist", to: "/ulist", class: "register-btn" %>
 </div>
-<%= form_for @changeset, "/", [class: "header-form"], fn f -> %>
+<%= form_for @changeset, "/login", [class: "header-form"], fn f -> %>
   <label>Username</label>
   <%= text_input f, :username, [id: "username-login"] %>
   <label>Password</label>
