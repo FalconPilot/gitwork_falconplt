@@ -1,3 +1,5 @@
+import $ from "jquery"
+
 const login_btn   = document.getElementById('login-btn')
 const logout_btn  = document.getElementById('logout-btn')
 
