@@ -1,5 +1,3 @@
-import $ from "jquery"
-
 const login_btn   = document.getElementById('login-btn')
 const logout_btn  = document.getElementById('logout-btn')
 
@@ -33,8 +31,9 @@ function login_client() {
     },
     success: function(data) {
       if (data === "0") {
-        let username = uname_login.value
-        load_logged_ui(username)
+        location.replace("/");
+        // let username = uname_login.value
+        // load_logout(username)
       } else {
         // alert("Identifiants incorrects !")
         uname_login.value = ""
@@ -55,7 +54,7 @@ function logout_client() {
     success: function(data) {
       let err_code = parseInt(data)
       if (data === "0") {
-        load_delogged_ui()
+        load_login()
       }
     }
   })
@@ -72,7 +71,7 @@ let fields = {
 }
 
 // Load Logout
-function load_logged_ui(username) {
+function load_logout(username) {
   site_header.innerHTML = ""
   let msg = document.createElement("h1")
   msg.innerHTML = "Welcome " + username
@@ -84,7 +83,7 @@ function load_logged_ui(username) {
 }
 
 // Load login
-function load_delogged_ui() {
+function load_login() {
   site_header.innerHTML = ""
   let form = document.createElement("form")
   let keys = Object.keys(fields)
