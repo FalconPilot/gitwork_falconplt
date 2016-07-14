@@ -4,13 +4,13 @@ defmodule AsynchronousLogin.SessionController do
 
   # Login user
   def log(conn, session_params) do
-    IO.inspect(session_params)
     case AsynchronousLogin.Session.login(session_params, AsynchronousLogin.Repo) do
       {:ok, user} ->
-        conn = put_session conn, :current_user, user
-        text(conn, "0")
+        conn
+        |> put_session(:current_user, user)
+        |> text("0")
       :error ->
-        text conn, "1"
+        text(conn, "1")
     end
   end
 
@@ -18,10 +18,14 @@ defmodule AsynchronousLogin.SessionController do
   def drop(conn, _params) do
     case get_session(conn, :current_user) do
       nil ->
-        text conn, "1"
+        conn
+        |> redirect(to: "/")
+        text conn, "Unable to log out !"
       _   ->
-        conn = delete_session(conn, :current_user)
-        text conn, "0"
+        conn
+        |> delete_session(:current_user)
+        |> redirect(to: "/")
+        text conn, "OK !"
     end
   end
 
@@ -47,12 +51,7 @@ defmodule AsynchronousLogin.Session do
   alias AsynchronousLogin.User
 
   # Login user
-  def login(user_params, repo) do
-    if (user_params["user"]) do
-      params = user_params["user"]
-    else
-      params = user_params
-    end
+  def login(params, repo) do
     user = repo.get_by(User, username: params["username"])
     case verify(user, params["password"]) do
       true -> {:ok, user}
