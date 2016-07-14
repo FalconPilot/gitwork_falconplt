@@ -1,3 +1,4 @@
+<%= link "Register", to: "/register", class: "register-btn" %>
 <%= form_for @changeset, "/", [class: "header-form"], fn f -> %>
   <label>Username</label>
   <%= text_input f, :username, [id: "username-login"] %>

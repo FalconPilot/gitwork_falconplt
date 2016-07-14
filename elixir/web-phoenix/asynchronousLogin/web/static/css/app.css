@@ -57,6 +57,11 @@ hr.vr {
   color: red;
 }
 
+.register-btn {
+  font-style: italic;
+  color: #333;
+}
+
 /*
 **  Login visuals
 */
