@@ -1,0 +1,184 @@
+/*
+**  Default elements
+*/
+
+p {
+  margin: 0;
+}
+
+input[type=text] {
+  margin: 5px;
+  padding: 4px 6px;
+  border: 1px solid #333;
+  border-radius: 4px;
+}
+
+button {
+  outline: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+/*
+**  Standard classes
+*/
+
+.standard-btn {
+  font-size: 1.2em;
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  background-color: transparent;
+  border-radius: 4px;
+}
+
+/*
+**  Structural classes
+*/
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: #CCC;
+  font-family: sans-serif;
+}
+
+main, header, footer {
+  width: 100%;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/*
+**  App wrapper
+*/
+
+.app-wrapper {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.app-wrapper > div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-wrapper > div:not(.tasks-list) {
+  padding: 20px 5px;
+  box-sizing: border-box;
+}
+
+.tasks-list {
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+/*
+**  Header classes
+*/
+
+header {
+  background-color: #333;
+  box-shadow: 0px 0px 3px #000;
+}
+
+header > h1 {
+  width: 100%;
+  margin: 20px 0;
+  color: #FFF;
+  text-shadow: 0px 0px 2px #FFF;
+  text-align: center;
+  font-size: 2em;
+  font-variant: small-caps;
+}
+
+/*
+**  Footer classes
+*/
+
+footer > p {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: right;
+  font-size: 0.6em;
+}
+
+/*
+**  Task
+*/
+
+.todo-task {
+  width: 20%;
+  margin: 10px;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 3px #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+  transition: 0.1s;
+}
+
+.todo-task > h1,
+.todo-task > p {
+}
+
+.todo-task.task-todo { background-color: rgba(200, 150, 120, 0.8); }
+
+.todo-task.task-done { background-color: rgba(150, 200, 120, 0.8); }
+
+.todo-task > h1 {
+  position: relative;
+  width: 100%;
+  margin: 5px 0;
+  padding-right: 1.1em;
+  box-sizing: border-box;
+  font-size: 1.2em;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.todo-task > h1:before {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.todo-task.task-todo > h1:before { content: "✗"; }
+
+.todo-task.task-done > h1:before { content: "✓"; }
+
+.todo-task > button.standard-btn { background-color: #CCC; }
+
+.todo-task > button:not(.standard-btn) {
+  width: 2.1em;
+  height: 2.1em;
+  margin: 5px;
+  padding: 0;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  background-color: transparent;
+  text-align: center;
+  border-radius: 50%;
+  align-self: flex-end;
+}
