@@ -21,7 +21,15 @@ class Task extends Component {
 
   // Toggle Task status
   toggleStatus = () => {
-    let status = this.state.status ? "false" : "true";
+    // Update LocalStorage
+    let json = JSON.parse(localStorage.getItem("tasklist"));
+    if (!json) {
+      json = {};
+    }
+    json[this.props.name] = !this.state.status;
+    localStorage.setItem("tasklist", JSON.stringify(json));
+
+    // Update state
     this.setState(prevState => ({
       status: !prevState.status
     }));
