@@ -64,8 +64,10 @@ class App extends Component {
 
   // When component mounts
   componentDidMount() {
+    let json = JSON.parse(localStorage.getItem("tasklist"));
+    let initial = json ? json : {};
     this.setState(prevState => ({
-      tasks: JSON.parse(localStorage.getItem("tasklist"))
+      tasks: initial
     }));
   }
 
